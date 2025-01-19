@@ -7,13 +7,12 @@ import { ParsedValue } from "./types/parsed";
 dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN || "");
-
+const engine = new FreelanceHabrCom();
 const cache = new StackCache();
+let timer: any = 0;
 
 bot.start(async (ctx) => {
     ctx.reply("Погнали");
-
-    const engine = new FreelanceHabrCom();
 
     const handler = (result: ParsedValue[]) => {
         result.forEach((item) => {
@@ -34,15 +33,23 @@ bot.start(async (ctx) => {
     };
 
     const run = () => {
+        clearTimeout(timer);
+
         Promise.all([engine.list().then(handler)])
-            .then(() => setTimeout(run, 1000 * 60))
+            .then(() => {
+                timer = setTimeout(run, 1000 * 60);
+            })
             .catch((e) => {
                 console.warn(e);
-                setTimeout(run, 1000);
+                timer = setTimeout(run, 1000);
             });
     };
 
     run();
+});
+
+bot.command("stop", () => {
+    clearTimeout(timer);
 });
 
 bot.launch();
