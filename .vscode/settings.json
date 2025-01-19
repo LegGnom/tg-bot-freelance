@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "accessibility.signals.lineHasError": {
+        "sound": "off"
+    },
+    "accessibility.signalOptions.volume": 30
+}

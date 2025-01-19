@@ -1,0 +1,15 @@
+{
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "run",
+            "type": "go",
+            "request": "launch",
+            "args": ["run", "-config", "/Users/leggnom/.data-gap/config.json"],
+            "mode": "auto",
+            "program": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/data-gap-server"
+        }
+    ]
+}
